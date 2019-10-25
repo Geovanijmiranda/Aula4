@@ -19,4 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/usuario', 'usuarioController@getUsuarios')->name('usuarios.list');
+Route::middleware('auth')->group(function() {
+  
+   Route::get('/usuario', 'usuarioController@getUsuarios')->name('usuarios');
+   Route::get('/usuario2', 'usuarioController@getUsuarios2')->name('usuarios2');
+   Route::get('/lista', 'HeroiController@getListaController')->name('lista');
+   Route::get('herois/novo', 'HeroiController@create')->name('novo');
+   Route::post('herois/salva', 'HeroiController@store')->name('salva');
+
+});
