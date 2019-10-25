@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if($errors->any())
+                @json($error->all());
+            @endif
             <div class="card">
                 <div class="card-header">NOVO HEROI</div>
 

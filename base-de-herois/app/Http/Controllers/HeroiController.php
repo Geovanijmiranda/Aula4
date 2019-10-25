@@ -32,11 +32,16 @@ class HeroiController extends Controller
         $heroi = new Heroi();
         $heroi->nome = $req->nome;
         $heroi->identidade_secreta = $req->identidade_secreta;
-        $heroi->origem = $req->origem;
+        $heroi->orgiem = $req->origem;
         $heroi->forca = $req->forca;
-        $heroi->terrequeo = ($req->terrequeo && $req->terrequeo === 'on') ? true : false;
+        $heroi->terraqueo = ($req->terraqueo && $req->terraqueo === 'on') ? true : false;
         $heroi->pode_voar = ($req->pode_voar && $req->pode_voar === 'on') ? true : false;
-        $heroi->foto = $req->file('foto');
+        
+        $path = $req->file('foto')->getRealPath();
+        $foto = file_get_contents($path);
+        $base64 = base64_encode($foto);
+        
+        $heroi->foto = $base64;
         $heroi->save();
 
         return redirect('/herois');
